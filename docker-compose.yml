@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  front:
+    image: front
+    restart: always
+    environment:
+      - DEBUG=${DEBUG}
+      - PORT=${PORT}
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./static:/app/static
