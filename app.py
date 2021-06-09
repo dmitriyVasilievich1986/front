@@ -5,7 +5,8 @@ app = Flask(__name__, static_url_path="/static")
 
 
 @app.route("/")
-def index_view(*args, **kwargs):
+@app.route("/<path:path>")
+def index_view(path="", *args, **kwargs):
     return render_template("index.html")
 
 

@@ -4,7 +4,7 @@ LABEL author="dmitriyvasil@gmail.com"
 
 ENV HOST="0.0.0.0"
 ENV DEBUG=True
-ENV PORT=8000
+ENV PORT=8200
 
 RUN mkdir /app
 WORKDIR /app
