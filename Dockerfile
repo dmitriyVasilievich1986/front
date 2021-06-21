@@ -1,15 +1,19 @@
-FROM python:3.9
+FROM nodejscn/node:lts
 
 LABEL author="dmitriyvasil@gmail.com"
 
-ENV HOST="0.0.0.0"
 ENV DEBUG=True
-ENV PORT=8200
+ENV PORT=8000
 
 RUN mkdir /app
 WORKDIR /app
 
-COPY . /app
-RUN pip install -r requirements.txt
+COPY templates /app/templates
+COPY ./package-lock.json /app
+COPY ./package.json /app
+COPY static /app/static
+COPY ./app.js /app
 
-CMD python app.py
+RUN npm install
+
+CMD node app.js
