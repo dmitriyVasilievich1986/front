@@ -1,11 +1,11 @@
-const debug = process.env.DEBUG === undefined
+const development = process.env.DEBUG === undefined
 const port = process.env.PORT || 3000
 const express = require('express');
 const app = express()
 
-debug && app.use('/static', express.static('static'));
+app.use('/static', express.static('static'));
 
-app.all("/api/*", (req, res)=>{
+development && app.all("/api/*", (req, res)=>{
     res.status(404)
 })
 
