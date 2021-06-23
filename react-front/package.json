@@ -30,9 +30,14 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^28.0.0",
+    "@ckeditor/ckeditor5-code-block": "^28.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
-    "express": "^4.17.1"
+    "draft-js": "^0.11.7",
+    "express": "^4.17.1",
+    "react-draft-wysiwyg": "^1.14.7"
   }
 }

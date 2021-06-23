@@ -78,12 +78,12 @@ function Login(props) {
                         <VisibilityOffIcon onClick={_ => updateShow(!show)} className="login-icon" />
                 }
                 <input
-                    value={show ? password : "*".repeat(password.length)}
-                    onChange={passwordChangeHandler}
+                    onChange={e => updatePassword(e.target.value)}
+                    type={show ? "text" : "password"}
                     onKeyDown={enterClickHandler}
                     className="login-input"
                     placeholder="Пароль"
-                    type="text"
+                    value={password}
                 />
             </div>
             <p className="error">{error}</p>
