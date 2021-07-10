@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import {
     CreateAccount,
+    GoogleAuth,
     BlogWriter,
     Account,
     Navbar,
@@ -44,6 +45,7 @@ function App() {
                             <Route exact path='/blog/:name' render={() => <Main blog />} />
                             <Route exact path='/search' render={() => <Main search />} />
                             <Route exact path='/' render={() => <Main cards />} />
+                            <Route exact path='/oauth' component={GoogleAuth} />
                             <Route exact path='/write' component={BlogWriter} />
                             <Route exact path='/account' component={Account} />
                             <Route exact path='/login' component={Login} />

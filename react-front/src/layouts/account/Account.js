@@ -62,7 +62,7 @@ function Account(props) {
         <div className='login'>
             <div style={{ marginBottom: "5rem" }}>
                 <img src="/static/image/favicon.png" style={{ height: "70px", width: "70px" }} />
-                <h3 className='ml1'>Astron</h3>
+                <h3 className='ml1'>{process.env.REACT_APP_PROJECT_NAME}</h3>
             </div>
             {setInput(FaceIcon, "Имя", name, UpdateName, enterKeyHandler)}
             {setInput(FaceIcon, "Фамилия", surname, UpdateSurname, enterKeyHandler)}

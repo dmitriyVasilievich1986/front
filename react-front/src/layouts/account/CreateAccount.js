@@ -74,7 +74,7 @@ function CreateAccount(props) {
         <div className='login'>
             <div style={{ marginBottom: "5rem" }}>
                 <img src="/static/image/favicon.png" style={{ height: "70px", width: "70px" }} />
-                <h3 className='ml1'>Astron</h3>
+                <h3 className='ml1'>{process.env.REACT_APP_PROJECT_NAME}</h3>
             </div>
             {setInput(FaceIcon, 'Логин', login, UpdateLogin, UpdateLoginError, enterKeyHandler)}
             <h5 className='error'>{loginError}</h5>

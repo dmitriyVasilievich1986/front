@@ -14,6 +14,13 @@ function Login(props) {
     const [show, updateShow] = React.useState(false)
     const [login, updateLogin] = React.useState('')
     const [error, updateError] = React.useState("")
+    const [URL, updateURL] = React.useState(null)
+
+    React.useEffect(_ => {
+        axios.get("/auth/get_google_url/")
+            .then(data => updateURL(data.data.url_string))
+            .catch(err => console.log(err.message))
+    }, [])
 
     const sendLoginData = _ => {
         const context = {
@@ -34,15 +41,6 @@ function Login(props) {
             .catch(err => updateError("неверные данные"))
     }
 
-    const passwordChangeHandler = e => {
-        updateError("")
-        if (e.target.value.length >= password.length) {
-            updatePassword(password + e.target.value.slice(-1))
-        } else {
-            updatePassword(password.slice(0, -1))
-        }
-    }
-
     const updateLoginHandler = e => {
         updateLogin(e.target.value)
         updateError("")
@@ -59,7 +57,7 @@ function Login(props) {
     return (
         <div className='login'>
             <img src="/static/image/favicon.png" style={{ height: "70px", width: "70px" }} />
-            <h3 className='ml1'>Astron</h3>
+            <h3 className='ml1'>{process.env.REACT_APP_PROJECT_NAME}</h3>
             <div style={{ display: "flex", marginTop: "5rem" }}>
                 <FaceIcon className="login-icon" />
                 <input
@@ -87,7 +85,10 @@ function Login(props) {
                 />
             </div>
             <p className="error">{error}</p>
-            <button className='enter-btn mb3' onClick={sendLoginData}><h3>Войти</h3></button>
+            <button className='enter-btn mt4' onClick={sendLoginData}><h3>Войти</h3></button>
+            <div>
+                {URL && <a href={URL}><img src="/static/image/google-logo.png" style={{ height: "60px", width: "60px" }}></img></a>}
+            </div>
             <p>Нет аккаунта?</p>
             <Link style={{ outline: "none" }} to='/create_account'><h3 className="link-gray">Создать</h3></Link>
         </div>

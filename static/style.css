@@ -114,7 +114,9 @@ ul {
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: #0C1446;
+    -webkit-box-shadow: 0 0 0 30px #0C1446 inset !important;
     color: #ccc;
+    -webkit-text-fill-color: #ccc !important;
     outline: none;
     width: 100%;
 }
@@ -315,7 +317,8 @@ link:focus {
 .enter-btn {
     background-color: #87ACA3;
     border-radius: 10px;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 20px;
     border:none;
     width: 80%;
     color: #050A30;
