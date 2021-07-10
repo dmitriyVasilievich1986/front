@@ -1,4 +1,6 @@
 const path = require('path')
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 
 module.exports = {
     entry: [
@@ -11,10 +13,15 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(dotenv.config().parsed)
+        })
+    ],
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.js$|\.jsx$/,
                 exclude: /node_modules/,
                 use: [
                     {

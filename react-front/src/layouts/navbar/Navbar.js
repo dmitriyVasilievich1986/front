@@ -12,8 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import FaceIcon from '@material-ui/icons/Face';
 
 function Navbar(props) {
-    // console.log(props.fullCatalog)
-    const [first, updateFirst] = React.useState(true)
     const [text, updateText] = React.useState("")
     const history = useHistory()
 
@@ -23,7 +21,7 @@ function Navbar(props) {
                 .then(data => props.updateProperties({ user: new User(data.data) }))
                 .catch(_ => { })
         }
-    }, [first])
+    }, [])
 
     const sendLogoutData = _ => {
         axios.delete('/auth/accounts/1', options())
@@ -53,7 +51,7 @@ function Navbar(props) {
                 <div className="col1">
                     <div className="row align-center">
                         <img src="/static/image/favicon.png" style={{ height: "30px", width: "30px" }} />
-                        <h3 className='ml1'>Astron</h3>
+                        <h3 className='ml1'>{process.env.REACT_APP_PROJECT_NAME}</h3>
                     </div>
                     <div className="mb2 row align-center">
                         <SearchIcon />
@@ -69,7 +67,7 @@ function Navbar(props) {
                 <div className='col1 align-center row justify-between'>
                     <Link to='/'><h3 className="link">Главная</h3></Link>
                     {
-                        props.fullCatalog.child?.map(c =>
+                        props.fullCatalog.catalog?.map(c =>
                             <Link key={c.name} to={`/catalog/${c.name}/`}>
                                 <h3 className="link">{c.title}</h3>
                             </Link>)

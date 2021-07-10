@@ -1,7 +1,7 @@
 import ACTION_TYPES from '../actions/actionTypes'
 
 const initState = {
-    fullCatalog: { 'name': '/', title: 'Главная' },
+    fullCatalog: { 'name': '/', title: 'Главная', catalog: [] },
     token: localStorage.getItem('token') || "",
     comments: [],
     indexes: [],

@@ -25,10 +25,10 @@ import {
 function App() {
     axios.get('/api/catalog/1/')
         .then(data => {
-            if (data.data.get_child) {
+            if (data.data.catalog) {
                 store.dispatch({
                     type: ACTION_TYPES.UPDATE_PROPERTIES,
-                    payload: { fullCatalog: data.data.get_child },
+                    payload: { fullCatalog: data.data.catalog },
                 })
             }
         })

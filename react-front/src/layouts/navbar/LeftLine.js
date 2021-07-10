@@ -4,11 +4,10 @@ import getChild from './getChild'
 import React from 'react'
 
 function LeftLine(props) {
-
     return (
         <div>
             <Link to={props.fullCatalog.name}>{props.fullCatalog.title}</Link>
-            <ul>{props.fullCatalog.child?.map(c => getChild(c))}</ul>
+            <ul>{props.fullCatalog.catalog?.map(c => getChild(c))}</ul>
         </div>
     )
 }

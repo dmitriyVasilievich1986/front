@@ -14,7 +14,6 @@ function CardList() {
         }
         axios.post(`/api/blog/page/`, context)
             .then(data => {
-                console.log(data.data)
                 updatePage(page + 1)
                 updateCards([...cards, ...data.data.blogs])
                 updatePages(data.data.pages)

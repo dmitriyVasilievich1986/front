@@ -1,5 +1,5 @@
-import React from 'react'
 import AddComment from './AddComment'
+import React from 'react'
 
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
@@ -30,7 +30,7 @@ function Comment(props) {
             </div>
             {showAnswer && <AddComment cancel={_ => updateShowAnswer(!showAnswer)} parent={props.c.id} className="mt2" />}
             <ul>
-                {props.c.child?.map((c, i) => <li key={i}><Comment c={c} /></li>)}
+                {props.c.comments?.map((c, i) => <li key={i}><Comment c={c} /></li>)}
             </ul>
         </div>
     )

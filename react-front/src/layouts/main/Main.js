@@ -22,8 +22,7 @@ function Main(props) {
             const apiPath = `/api/${props.blog ? "blog" : "catalog"}/${name}/by_name/`
             axios.get(apiPath, getHeaders())
                 .then(data => {
-                    // console.log(data.data)
-                    updateParent(data.data.get_parent)
+                    updateParent(data.data.parent)
                     updateParams(data.data)
                 })
                 .catch(err => console.log(err))
@@ -35,7 +34,7 @@ function Main(props) {
             <div className='main-container'>
                 <div className='left-line'><LeftLine /></div>
                 <div className='col3'>
-                    {name && <BreadCumber parent={parent} />}
+                    {name && <BreadCumber parent={parent} self={params} />}
                     {
                         (props.catalog && <Catalog catalog={params} />) ||
                         (props.blog && <Blog blog={params} />) ||

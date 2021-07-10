@@ -9,9 +9,10 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY templates /app/templates
+COPY static /app/static
+
 COPY ./package-lock.json /app
 COPY ./package.json /app
-COPY static /app/static
 COPY ./app.js /app
 
 RUN npm install
