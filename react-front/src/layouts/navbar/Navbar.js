@@ -32,16 +32,18 @@ function Navbar(props) {
 
     const searchHandler = e => {
         if (e.key == "Enter") {
-            const context = {
-                tags: text
-            }
+            // const context = {
+            //     tags: text
+            // }
+            const sendText = text
             updateText("")
-            axios.post(`/api/blog/search/`, context)
-                .then(data => {
-                    props.updateProperties({ search: data.data })
-                    history.push("/search/")
-                })
-                .catch(err => console.log(err.message))
+            history.push(`/search?search=${sendText}`)
+            // axios.post(`/api/blog/search/`, context)
+            //     .then(data => {
+            //         props.updateProperties({ search: data.data })
+            //         history.push("/search/")
+            //     })
+            //     .catch(err => console.log(err.message))
         }
     }
 

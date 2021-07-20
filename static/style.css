@@ -13,6 +13,25 @@ html {
 h1, h2, h3, h4, h5, h6, p, a {
     font-family: 'Crimson Text', serif;
 }
+p {
+    text-indent: 1rem;
+}
+blockquote {
+    background-color: black;
+    border-radius: 10px;
+    white-space: nowrap;
+    color: lightgray;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: 600;
+    max-width: 80vw;
+    overflow: auto;
+    padding: 1rem;
+    width: 80%;
+}
+blockquote > p {
+    text-indent: 0;
+}
 h3 {
     text-align: center;
     font-weight: bold;
@@ -105,8 +124,8 @@ ul {
     text-align: center;
     margin-left: auto;
     min-height: 400px;
-    max-width: 400px;
     margin-top: 3rem;
+    max-width: 80vw;
     color: #ccc;
 }
 .login-input,

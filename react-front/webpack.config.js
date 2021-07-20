@@ -3,11 +3,11 @@ const webpack = require('webpack')
 const dotenv = require('dotenv')
 
 module.exports = {
-    entry: [
-        'babel-polyfill', './src/index.js'
-    ],
+    entry: {
+        index: './src/index.js',
+    },
     output: {
-        filename: 'index.js',
+        filename: '[name].js',
         path: path.resolve('../static'),
     },
     resolve: {

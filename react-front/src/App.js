@@ -6,15 +6,16 @@ import store from './store'
 import React from 'react'
 import axios from 'axios'
 
+import loadable from '@loadable/component'
+
+
 import {
-    CreateAccount,
     GoogleAuth,
-    BlogWriter,
     Account,
     Navbar,
+    Search,
     Footer,
     Login,
-    Main,
 } from './layouts'
 
 import {
@@ -23,16 +24,36 @@ import {
     Route,
 } from "react-router-dom";
 
+
+const CreateAccount = loadable(() => import("./layouts/account/CreateAccount"))
+const BlogWriter = loadable(() => import("./layouts/blog/BlogWriter"))
+const Main = loadable(() => import("./layouts/main/Main"))
+
+
 function App() {
-    axios.get('/api/catalog/1/')
-        .then(data => {
-            if (data.data.catalog) {
-                store.dispatch({
-                    type: ACTION_TYPES.UPDATE_PROPERTIES,
-                    payload: { fullCatalog: data.data.catalog },
-                })
-            }
-        })
+    const [show, updateShow] = React.useState(false)
+
+    const updateButtonVisibility = _ => {
+        if (!show && window.pageYOffset > 200)
+            updateShow(true)
+        else if (show && window.pageYOffset < 200)
+            updateShow(false)
+    }
+
+    window.addEventListener("scroll", updateButtonVisibility)
+
+    React.useEffect(_ => {
+        axios.get('/api/catalog/1/')
+            .then(data => {
+                if (data.data.catalog) {
+                    store.dispatch({
+                        type: ACTION_TYPES.UPDATE_PROPERTIES,
+                        payload: { fullCatalog: data.data.catalog },
+                    })
+                }
+            })
+    })
+
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
             <div style={{ flex: 1 }}>
@@ -43,11 +64,11 @@ function App() {
                             <Route exact path='/catalog/:name' render={() => <Main catalog />} />
                             <Route exact path='/create_account' component={CreateAccount} />
                             <Route exact path='/blog/:name' render={() => <Main blog />} />
-                            <Route exact path='/search' render={() => <Main search />} />
                             <Route exact path='/' render={() => <Main cards />} />
                             <Route exact path='/oauth' component={GoogleAuth} />
                             <Route exact path='/write' component={BlogWriter} />
                             <Route exact path='/account' component={Account} />
+                            <Route exact path='/search' component={Search} />
                             <Route exact path='/login' component={Login} />
                             <Route path='/' component={Error404} />
                         </Switch>
@@ -55,6 +76,7 @@ function App() {
                 </Provider>
             </div>
             <Footer />
+            {show && <button onClick={_ => window.scrollTo({ top: 0 })} className="up">наверх</button>}
         </div>
     )
 }

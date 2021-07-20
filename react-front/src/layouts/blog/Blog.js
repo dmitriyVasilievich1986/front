@@ -7,26 +7,15 @@ import Comment from './Comment'
 import React from 'react'
 import axios from 'axios'
 
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 function Blog(props) {
-    // console.log(props.blog)
-    // props.updateProperties({ comments: [] })
     const [commentsCount, updateCommentsCount] = React.useState(0)
     const [likesCount, updateLikesCount] = React.useState(0)
     const [viewCount, updateViewCount] = React.useState(0)
     const [isLiked, updateIsLiked] = React.useState(false)
     const [result, updateResult] = React.useState("")
-    const [show, updateShow] = React.useState(false)
-
-    const updateButtonVisibility = _ => {
-        if (!show && window.pageYOffset > 200)
-            updateShow(true)
-        else if (show && window.pageYOffset < 200)
-            updateShow(false)
-    }
-
-    window.addEventListener("scroll", updateButtonVisibility)
 
     React.useEffect(_ => {
         let r = ""
@@ -40,10 +29,10 @@ function Blog(props) {
         props.updateProperties({ indexes: indexes })
 
         props.updateProperties({ comments: props.blog.comments })
-        updateCommentsCount(props.blog.comments_count)
-        updateLikesCount(props.blog.get_likes_count)
-        updateViewCount(props.blog.get_view_count)
-        updateIsLiked(props.blog.is_liked)
+        updateCommentsCount(props.blog.comments_count || 0)
+        updateLikesCount(props.blog.likes_count || 0)
+        updateViewCount(props.blog.view_count || 0)
+        updateIsLiked(props.blog.is_liked || false)
     }, [props.blog])
 
     const sendLike = _ => {
@@ -58,7 +47,11 @@ function Blog(props) {
 
     return (
         <div>
-            <div dangerouslySetInnerHTML={{ __html: result }} />
+            {
+                result === "" ?
+                    <div style={{ marginTop: "5rem", marginBottom: "5rem" }} className="row justify-center"><CircularProgress /></div> :
+                    <div dangerouslySetInnerHTML={{ __html: result }} />
+            }
             <div style={{ height: "3rem" }} />
             <div className="statistics align-center row">
                 <Statistics
@@ -74,7 +67,6 @@ function Blog(props) {
             <div style={{ height: "3rem" }} />
             <p>Оставьте свой комментарий:</p>
             <AddComment owner={props.blog.id} />
-            {show && <button onClick={_ => window.scrollTo({ top: 0 })} className="up">наверх</button>}
             <div style={{ height: "5rem" }}></div>
         </div>
     )

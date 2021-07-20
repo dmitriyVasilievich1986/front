@@ -6,26 +6,29 @@ import LeftLine from '../navbar/LeftLine'
 import Catalog from '../catalog/Catalog'
 import CardList from './CardList'
 import Blog from '../blog/Blog'
-import Search from './Search'
 import React from 'react'
 import axios from 'axios'
 
 
-
 function Main(props) {
+
     const [params, updateParams] = React.useState({})
     const [parent, updateParent] = React.useState([])
     const { name } = useParams()
 
     React.useEffect(_ => {
         if (name) {
+            updateParent([])
+            updateParams({})
             const apiPath = `/api/${props.blog ? "blog" : "catalog"}/${name}/by_name/`
             axios.get(apiPath, getHeaders())
                 .then(data => {
                     updateParent(data.data.parent)
                     updateParams(data.data)
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }, [name])
 
@@ -38,7 +41,6 @@ function Main(props) {
                     {
                         (props.catalog && <Catalog catalog={params} />) ||
                         (props.blog && <Blog blog={params} />) ||
-                        (props.search && <Search />) ||
                         (props.cards) && <CardList />
                     }
                 </div>

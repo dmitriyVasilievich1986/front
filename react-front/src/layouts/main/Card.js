@@ -12,8 +12,8 @@ function Card(props) {
             <div>
                 <Statistics
                     comments={props.card.comments_count}
-                    likes={props.card.get_likes_count}
-                    views={props.card.get_view_count}
+                    likes={props.card.likes_count}
+                    views={props.card.view_count}
                     isLiked={false}
                     sendLike={null}
                 />
